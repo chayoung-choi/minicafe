@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  error:
+    include-message: always # response ? exception message ?? ??
+    include-stacktrace: never
+spring:
+  application:
+    name: mini-cafe
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    defer-datasource-initialization: true # data.sql Hibernate ??? ?? ??
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true # JPA Log
+
