@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,7 +46,7 @@ class UserControllerTest {
             .content(objectMapper.writeValueAsString(user)))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.email").exists())
-        .andDo(print());
+        .andDo(document("create-users"));
   }
 
   @Test

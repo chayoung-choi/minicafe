@@ -1,0 +1,38 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+= MINI-CAFE API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectlinks:
+:sectanchors:
+
+[[INTRO]]
+== Overview
+
+미니 카페 API
+
+[[USER]]
+== USER
+
+=== `GET /users` - 회원 정보 조회
+
+회원 정보를 조회한다.
+
+=== `POST /users` - 회원 가입
+:path: {snippets}/create-users
+
+요청된 정보로 회원 가입을 한다.
+
+==== Request
+
+include::{path}/http-request.adoc[]
+
+==== Response
+
+include::{path}/http-response.adoc[]
