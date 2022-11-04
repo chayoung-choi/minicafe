@@ -19,7 +19,6 @@ public class UserController {
 
   private final UserService userService;
 
-
   /**
    * 회원 가입
    *
@@ -30,10 +29,19 @@ public class UserController {
   @ResponseStatus(HttpStatus.CREATED)
   UserResponse create(@RequestBody @Valid UserRegistrationData registrationData) {
     User user = userService.registerUser(registrationData);
-    log.info(user.toString());
     return new UserResponse(user);
   }
 
-
+  /**
+   * 회원 정보 조회
+   * @param id 회원 ID
+   * @return 회원 정보
+   */
+  @GetMapping(value="/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  UserResponse getUser(@PathVariable Long id) {
+    User user = userService.getUserById(id);
+    return new UserResponse(user);
+  }
 }
 

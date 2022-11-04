@@ -13,4 +13,6 @@
 http://localhost:8080/docs/index.html
 
 ### USERS
-`GET /users` : 회원 전체 조회
+`GET /users/{id}` : 회원 정보 조회
+
+`POST /users` : 회원 가입

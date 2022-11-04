@@ -5,6 +5,6 @@ package com.eden.minicafe.exception;
  */
 public class UserEmailDuplicationException extends RuntimeException {
   public UserEmailDuplicationException(String email) {
-    super("User email is already existed: " + email);
+    super("이미 사용중인 이메일입니다. : " + email);
   }
 }
