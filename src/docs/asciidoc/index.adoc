@@ -29,10 +29,10 @@ endif::[]
 
 요청된 정보로 회원 가입을 한다.
 
-==== Request
+Request
 
 include::{path}/http-request.adoc[]
 
-==== Response
+Response
 
 include::{path}/http-response.adoc[]

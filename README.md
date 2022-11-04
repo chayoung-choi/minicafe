@@ -8,3 +8,9 @@
 | Java       | 17      |
 | SpringBoot | 2.7.5   |
 | Gradle     | 7.5.1   |
+
+## API Dosc
+http://localhost:8080/docs/index.html
+
+### USERS
+`GET /users` : 회원 전체 조회
