@@ -20,4 +20,10 @@ public class ControllerExceptionAdvice {
     return new ErrorResponse("중복된 이메일입니다.");
   }
 
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(NotFoundException.class)
+  public ErrorResponse handleNotFound() {
+    return new ErrorResponse("요청 정보를 찾을 수 없습니다.");
+  }
+
 }
