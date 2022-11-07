@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Getter
@@ -17,6 +19,7 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "user_id")
   private Long id;
 
   @Email
@@ -34,6 +37,9 @@ public class User {
   private String rank;
 
   private String password;
+
+  @OneToMany(mappedBy = "user") // 읽기 전용 설정
+  private List<Order> orders = new ArrayList<>();
 
   @CreationTimestamp
   @Column(updatable = false)

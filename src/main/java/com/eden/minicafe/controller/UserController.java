@@ -1,10 +1,10 @@
 package com.eden.minicafe.controller;
 
-import com.eden.minicafe.application.UserService;
 import com.eden.minicafe.domain.User;
 import com.eden.minicafe.dto.UserData;
 import com.eden.minicafe.dto.UserRegistrationData;
 import com.eden.minicafe.dto.UserResponse;
+import com.eden.minicafe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
