@@ -88,7 +88,7 @@ class UserControllerTest {
   @CsvSource({"test@gmail.com, ", " ,test", "noemail,test"})
   @DisplayName("로그인 필수값 오류면, BadRequest")
   void login_bad_request(String email, String password) throws Exception {
-    Map userDto = new HashMap<>();
+    Map<String, String> userDto = new HashMap<>();
     userDto.put("email", email);
     userDto.put("password", password);
 
