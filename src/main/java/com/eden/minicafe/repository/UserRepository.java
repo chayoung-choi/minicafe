@@ -1,5 +1,6 @@
-package com.eden.minicafe.domain;
+package com.eden.minicafe.repository;
 
+import com.eden.minicafe.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
