@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseBody
 @ControllerAdvice
 public class ControllerExceptionAdvice {
-  
+
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(UserEmailDuplicationException.class)
   public ErrorResponse handleUserEmailIsAlreadyExisted() {
@@ -22,8 +22,13 @@ public class ControllerExceptionAdvice {
 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(NotFoundException.class)
-  public ErrorResponse handleNotFound() {
+  public ErrorResponse handleNotFoundException() {
     return new ErrorResponse("요청 정보를 찾을 수 없습니다.");
   }
 
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  @ExceptionHandler(LoginFailException.class)
+  public ErrorResponse handleLoginFailException() {
+    return new ErrorResponse("Log-in failed");
+  }
 }

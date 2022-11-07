@@ -2,15 +2,14 @@ package com.eden.minicafe.application;
 
 import com.eden.minicafe.domain.User;
 import com.eden.minicafe.domain.UserRepository;
+import com.eden.minicafe.dto.UserData;
 import com.eden.minicafe.dto.UserRegistrationData;
+import com.eden.minicafe.exception.LoginFailException;
 import com.eden.minicafe.exception.NotFoundException;
 import com.eden.minicafe.exception.UserEmailDuplicationException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 
 /**
@@ -35,20 +34,32 @@ public class UserService {
     }
 
     return userRepository.save(
-            User.builder()
-                    .email(email)
-                    .name(registrationData.getName())
-                    .phone(registrationData.getPhone())
-                    .password(registrationData.getPassword())
-                    .build());
+        User.builder()
+            .email(email)
+            .name(registrationData.getName())
+            .phone(registrationData.getPhone())
+            .password(registrationData.getPassword())
+            .build());
   }
 
   /**
    * 회원 정보 조회
+   *
    * @param id 회원 ID
    * @return 회원 정보
    */
-  public User getUserById(Long id)  {
-    return userRepository.findById(id).orElseThrow(()-> new NotFoundException(String.format("회원(%d)", id)));
+  public User getUserById(Long id) {
+    return userRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("회원(%d)", id)));
+  }
+
+  /**
+   * 회원 로그인
+   *
+   * @param userData 로그인 요청 정보
+   * @return 회원 정보
+   */
+  public User login(UserData userData) {
+    return userRepository.findByEmailAndPassword(userData.getEmail(), userData.getPassword())
+        .orElseThrow(() -> new LoginFailException(userData.getEmail()));
   }
 }
