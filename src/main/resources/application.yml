@@ -1,7 +1,7 @@
 server:
   port: 8080
   error:
-    include-message: always # response ? exception message ?? ??
+    include-message: always # response exception message
     include-stacktrace: never
 spring:
   application:
@@ -13,8 +13,8 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: none
-    defer-datasource-initialization: true # data.sql Hibernate ??? ?? ??
+      ddl-auto: create-drop
+    defer-datasource-initialization: true # data.sql Hibernate
     show-sql: true
     properties:
       hibernate:
