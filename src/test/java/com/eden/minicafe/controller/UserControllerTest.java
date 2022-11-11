@@ -1,10 +1,7 @@
 package com.eden.minicafe.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserControllerTest {
   static Map<String, String> user = new HashMap<>();
   @Autowired
@@ -41,7 +39,11 @@ class UserControllerTest {
 
   @Test
   @Order(1)
-  void 회원_가입() throws Exception {
+  @DisplayName("회원 가입")
+  void sign_up() throws Exception {
+
+    user.put("email", "test2@gmail.com");
+
     mvc.perform(post("/users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(user)))
@@ -52,7 +54,8 @@ class UserControllerTest {
 
   @Test
   @Order(2)
-  void 중복_회원_가입() throws Exception {
+  @DisplayName("중복 회원 가입이면, BadRequest")
+  void sign_up_duplicate() throws Exception {
     mvc.perform(post("/users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(user)))
@@ -61,7 +64,8 @@ class UserControllerTest {
 
   @Test
   @Order(3)
-  void 로그인() throws Exception {
+  @DisplayName("로그인")
+  void login() throws Exception {
     mvc.perform(post("/login")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(user)))
@@ -71,8 +75,8 @@ class UserControllerTest {
   }
 
   @Test
-  @Order(3)
-  @DisplayName("비밀번호 오류이면 LoginFailException")
+  @Order(4)
+  @DisplayName("비밀번호 오류이면, LoginFailException")
   void login_fail() throws Exception {
     user.put("password", "test");
 
@@ -83,7 +87,7 @@ class UserControllerTest {
         .andDo(document("login"));
   }
 
-  @Order(4)
+  @Order(5)
   @ParameterizedTest
   @CsvSource({"test@gmail.com, ", " ,test", "noemail,test"})
   @DisplayName("로그인 필수값 오류면, BadRequest")

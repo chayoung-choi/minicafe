@@ -19,4 +19,6 @@ spring:
     properties:
       hibernate:
         format_sql: true # JPA Log
-
+  devtools:
+    restart:
+      enabled: true

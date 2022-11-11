@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ControllerExceptionAdvice {
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ExceptionHandler(UserEmailDuplicationException.class)
-  public ErrorResponse handleUserEmailIsAlreadyExisted() {
-    return new ErrorResponse("중복된 이메일입니다.");
+  @ExceptionHandler(DuplicationException.class)
+  public ErrorResponse handleDuplicationException(DuplicationException e) {
+    return new ErrorResponse(String.format("이미 사용중인 %s입니다.", e.getMessage()));
   }
 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(NotFoundException.class)
-  public ErrorResponse handleNotFoundException() {
-    return new ErrorResponse("요청 정보를 찾을 수 없습니다.");
+  public ErrorResponse handleNotFoundException(NotFoundException e) {
+    return new ErrorResponse(e.getMessage());
   }
 
   @ResponseStatus(HttpStatus.UNAUTHORIZED)

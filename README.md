@@ -10,6 +10,8 @@
 | SpringBoot | 2.7.5   |
 | Gradle     | 7.5.1   |
 
+``
+
 ## API Dosc
 
 http://localhost:8080/docs/index.html
@@ -24,12 +26,32 @@ http://localhost:8080/docs/index.html
 
 ### ITEMS : 상품
 
-`GET /items` : 상품 전체 조회
-
 `POST /items` : 상품 등록
+
+`GET /items` : 상품 전체 조회
 
 ## TO-DO
 
-- [ ] 회원 가입, 회원 정보 조회, 로그인
-- [ ] 상품 등록, 상품 전체 조회
+### 회원
+
+- [X] 회원 가입
+    - [ ] email 중복 체크
+- [X] 회원 정보 조회
+- [X] 로그인
+- [ ] 회원 등급 enum으로 관리
+
+### 주문
+
+- [x] 주문 요청
+    - [X] 주문 정보 등록과 상품 재고 변경
+- [ ] 주문 진행 상황 변경
+
+### 상품
+
+- [X] 상품 등록
+    - [X] 상품 이름 중복 체크
+- [X] 상품 전체 조회
+
+### 공통
+
 - [ ] Enum @Valid

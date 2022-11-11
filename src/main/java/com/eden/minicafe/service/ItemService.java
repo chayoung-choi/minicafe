@@ -2,6 +2,7 @@ package com.eden.minicafe.service;
 
 import com.eden.minicafe.domain.Item;
 import com.eden.minicafe.dto.ItemCreateDto;
+import com.eden.minicafe.exception.DuplicationException;
 import com.eden.minicafe.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,14 +28,18 @@ public class ItemService {
    * @return 상품
    */
   @Transactional
-  public Item createItem(ItemCreateDto itemDto) {
+  public Long createItem(ItemCreateDto itemDto) {
+    if (itemRepository.existsByName(itemDto.getName())) {
+      throw new DuplicationException("상품 이름", itemDto.getName());
+    }
+
     Item item = Item.builder()
         .name(itemDto.getName())
         .category(itemDto.getCategory())
         .price(itemDto.getPrice())
         .stock(Optional.ofNullable(itemDto.getStock()).orElse(0))
         .build();
-    return itemRepository.save(item);
+    return itemRepository.save(item).getId();
   }
 
   /**

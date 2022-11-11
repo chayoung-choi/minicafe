@@ -27,7 +27,7 @@ public class ItemController {
    */
   @PostMapping("")
   @ResponseStatus(HttpStatus.CREATED)
-  Item create(@RequestBody @Valid ItemCreateDto itemCreateDto) {
+  Long createItem(@RequestBody @Valid ItemCreateDto itemCreateDto) {
     return itemService.createItem(itemCreateDto);
   }
 

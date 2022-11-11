@@ -1,5 +1,6 @@
 package com.eden.minicafe.domain;
 
+import com.eden.minicafe.exception.NotEnoughStockException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
  */
 @ToString
 @Getter
+//@Setter
 @Entity
 @Table(name = "items")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,4 +38,22 @@ public class Item extends BaseTime {
     this.stock = stock;
   }
 
+  /**
+   * stock 증가
+   */
+  public void addStock(int quantity) {
+    this.stock += quantity;
+  }
+
+
+  /**
+   * stock 감소
+   */
+  public void removeStock(int quantity) {
+    int restStock = this.stock - quantity;
+    if (restStock < 0) {
+      throw new NotEnoughStockException("재고가 부족합니다.");
+    }
+    this.stock = restStock;
+  }
 }

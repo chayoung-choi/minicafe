@@ -3,9 +3,9 @@ package com.eden.minicafe.service;
 import com.eden.minicafe.domain.User;
 import com.eden.minicafe.dto.UserData;
 import com.eden.minicafe.dto.UserRegistrationData;
+import com.eden.minicafe.exception.DuplicationException;
 import com.eden.minicafe.exception.LoginFailException;
 import com.eden.minicafe.exception.NotFoundException;
-import com.eden.minicafe.exception.UserEmailDuplicationException;
 import com.eden.minicafe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class UserService {
   public User registerUser(UserRegistrationData registrationData) {
     String email = registrationData.getEmail();
     if (userRepository.existsByEmail(email)) {
-      throw new UserEmailDuplicationException(email);
+      throw new DuplicationException("email", email);
     }
 
     return userRepository.save(
