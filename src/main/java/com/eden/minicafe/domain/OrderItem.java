@@ -4,15 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import static lombok.AccessLevel.PRIVATE;
-
 @ToString
 @Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = PRIVATE)
+@AllArgsConstructor
 public class OrderItem {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

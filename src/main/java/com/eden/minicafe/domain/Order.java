@@ -3,11 +3,10 @@ package com.eden.minicafe.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static lombok.AccessLevel.PRIVATE;
 
 /**
  * 상품 주문 정보
@@ -19,7 +18,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = PRIVATE)
+@AllArgsConstructor
 public class Order extends BaseTime {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,11 +59,40 @@ public class Order extends BaseTime {
     orderItem.setOrder(this);
   }
 
+  /**
+   * 주문 상품 전체 가격 조회
+   */
   public int getTotalPrice() {
     int totalPrice = 0;
     for (OrderItem orderItem : orderItems) {
       totalPrice += orderItem.getTotalPrice();
     }
     return totalPrice;
+  }
+
+  /**
+   * 주문 취소
+   */
+  public void cancel() {
+    switch (status) {
+      case CONFIRM -> throw new IllegalComponentStateException("이미 제조가 시작된 주문은 취소가 불가능합니다.");
+      case COMPLETION -> throw new IllegalComponentStateException("이미 제조가 완료된 주문은 취소가 불가능합니다.");
+      case PICKUP -> throw new IllegalComponentStateException("취소가 불가능합니다.");
+      case CANCEL -> throw new IllegalComponentStateException("이미 취소된 주문입니다.");
+    }
+
+    this.setStatus(OrderStatus.CANCEL);
+    orderItems.stream().forEach(orderItem -> orderItem.cancel());
+  }
+
+  /**
+   * 주문 확인
+   */
+  public void confirm() {
+    if (status != OrderStatus.ORDER) {
+      throw new IllegalComponentStateException("잘못된 요청입니다.");
+    }
+    
+    this.setStatus(OrderStatus.CONFIRM);
   }
 }

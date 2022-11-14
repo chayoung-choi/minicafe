@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 public class OrderRequest {
@@ -13,10 +14,7 @@ public class OrderRequest {
   private Long userId;
 
   @NotNull
-  @JsonProperty("item_id")
-  private Long itemId;
+  @JsonProperty("order_items")
+  private List<OrderItemDto> orderItems;
 
-  @NotNull
-  private Integer count;
-  
 }

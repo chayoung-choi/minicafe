@@ -1,5 +1,6 @@
 package com.eden.minicafe.dto;
 
+import com.eden.minicafe.domain.Rank;
 import com.eden.minicafe.domain.User;
 import lombok.Getter;
 
@@ -15,7 +16,7 @@ public class UserResponse {
   private String name;
   private String phone;
   private Integer point;
-  private String rank;
+  private Rank rank;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 

@@ -11,7 +11,17 @@ public enum Rank {
 
   private Integer point;
 
-  Rank(int i) {
-
+  public static Rank of(int point) {
+    Rank rank = Rank.SILVER;
+    if (point <= Rank.BRONZE.point) {
+      rank = Rank.BRONZE;
+    } else if (point <= Rank.SILVER.point) {
+      rank = Rank.SILVER;
+    } else if (point <= Rank.GOLD.point) {
+      rank = Rank.GOLD;
+    } else if (point <= Rank.DIAMOND.point) {
+      rank = Rank.DIAMOND;
+    }
+    return rank;
   }
 }

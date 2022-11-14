@@ -19,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ItemService {
 
+  private static final Integer DEFAULT_ITEM_STOCK = 100;
   private final ItemRepository itemRepository;
 
   /**
@@ -37,7 +38,7 @@ public class ItemService {
         .name(itemDto.getName())
         .category(itemDto.getCategory())
         .price(itemDto.getPrice())
-        .stock(Optional.ofNullable(itemDto.getStock()).orElse(0))
+        .stock(Optional.ofNullable(itemDto.getStock()).orElse(DEFAULT_ITEM_STOCK))
         .build();
     return itemRepository.save(item).getId();
   }
