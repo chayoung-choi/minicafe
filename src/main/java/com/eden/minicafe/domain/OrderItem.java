@@ -1,5 +1,6 @@
 package com.eden.minicafe.domain;
 
+import com.eden.minicafe.domain.item.Item;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package com.eden.minicafe.repository;
 
-import com.eden.minicafe.domain.Item;
+import com.eden.minicafe.domain.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

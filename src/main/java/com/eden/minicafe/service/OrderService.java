@@ -1,9 +1,9 @@
 package com.eden.minicafe.service;
 
-import com.eden.minicafe.domain.Item;
 import com.eden.minicafe.domain.Order;
 import com.eden.minicafe.domain.OrderItem;
 import com.eden.minicafe.domain.User;
+import com.eden.minicafe.domain.item.Item;
 import com.eden.minicafe.dto.OrderRequest;
 import com.eden.minicafe.exception.NotFoundException;
 import com.eden.minicafe.repository.ItemRepository;

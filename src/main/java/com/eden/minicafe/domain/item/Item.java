@@ -1,5 +1,7 @@
-package com.eden.minicafe.domain;
+package com.eden.minicafe.domain.item;
 
+import com.eden.minicafe.domain.BaseTime;
+import com.eden.minicafe.domain.Category;
 import com.eden.minicafe.exception.NotEnoughStockException;
 import lombok.*;
 
@@ -10,11 +12,14 @@ import javax.persistence.*;
  */
 @ToString
 @Getter
-//@Setter
+@Setter
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 @Table(name = "items")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item extends BaseTime {
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class Item extends BaseTime {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "item_id")
@@ -29,14 +34,6 @@ public class Item extends BaseTime {
 
   @Column(columnDefinition = "integer default 0")
   private Integer stock;
-
-  @Builder
-  public Item(String name, Integer price, Category category, Integer stock) {
-    this.name = name;
-    this.price = price;
-    this.category = category;
-    this.stock = stock;
-  }
 
   /**
    * stock 증가

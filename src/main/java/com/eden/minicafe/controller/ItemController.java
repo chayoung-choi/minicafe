@@ -1,7 +1,7 @@
 package com.eden.minicafe.controller;
 
-import com.eden.minicafe.domain.Item;
-import com.eden.minicafe.dto.ItemCreateDto;
+import com.eden.minicafe.domain.item.Item;
+import com.eden.minicafe.dto.ItemDto;
 import com.eden.minicafe.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +22,13 @@ public class ItemController {
   /**
    * 상품 등록
    *
-   * @param itemCreateDto 상품 정보
+   * @param itemDto 상품 정보
    * @return 생성된 상품 정보
    */
   @PostMapping("")
   @ResponseStatus(HttpStatus.CREATED)
-  Long createItem(@RequestBody @Valid ItemCreateDto itemCreateDto) {
-    return itemService.createItem(itemCreateDto);
+  Long createItem(@RequestBody @Valid ItemDto itemDto) {
+    return itemService.saveItem(itemDto);
   }
 
   /**

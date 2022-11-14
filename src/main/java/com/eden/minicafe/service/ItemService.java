@@ -1,7 +1,7 @@
 package com.eden.minicafe.service;
 
-import com.eden.minicafe.domain.Item;
-import com.eden.minicafe.dto.ItemCreateDto;
+import com.eden.minicafe.domain.item.Item;
+import com.eden.minicafe.dto.ItemDto;
 import com.eden.minicafe.exception.DuplicationException;
 import com.eden.minicafe.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 상품 관련 비즈니스 로직
@@ -29,18 +28,11 @@ public class ItemService {
    * @return 상품
    */
   @Transactional
-  public Long createItem(ItemCreateDto itemDto) {
+  public Long saveItem(ItemDto itemDto) {
     if (itemRepository.existsByName(itemDto.getName())) {
       throw new DuplicationException("상품 이름", itemDto.getName());
     }
-
-    Item item = Item.builder()
-        .name(itemDto.getName())
-        .category(itemDto.getCategory())
-        .price(itemDto.getPrice())
-        .stock(Optional.ofNullable(itemDto.getStock()).orElse(DEFAULT_ITEM_STOCK))
-        .build();
-    return itemRepository.save(item).getId();
+    return itemRepository.save(itemDto.toEntity()).getId();
   }
 
   /**
