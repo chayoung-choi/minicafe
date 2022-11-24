@@ -7,21 +7,20 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum Rank {
-  BRONZE(0), SILVER(100), GOLD(500), DIAMOND(1000);
+  BRONZE(0, 0), SILVER(100, 5), GOLD(500, 10), DIAMOND(1000, 20);
 
-  private Integer point;
+  private final Integer point; // 기준 포인트
+  private final Integer rateOfDiscount; // 할인율
 
   public static Rank of(int point) {
-    Rank rank = Rank.SILVER;
-    if (point <= Rank.BRONZE.point) {
-      rank = Rank.BRONZE;
-    } else if (point <= Rank.SILVER.point) {
-      rank = Rank.SILVER;
-    } else if (point <= Rank.GOLD.point) {
-      rank = Rank.GOLD;
-    } else if (point <= Rank.DIAMOND.point) {
-      rank = Rank.DIAMOND;
+    if (point >= Rank.DIAMOND.point) {
+      return Rank.DIAMOND;
+    } else if (point >= Rank.GOLD.point) {
+      return Rank.GOLD;
+    } else if (point >= Rank.SILVER.point) {
+      return Rank.SILVER;
+    } else {
+      return Rank.BRONZE;
     }
-    return rank;
   }
 }
