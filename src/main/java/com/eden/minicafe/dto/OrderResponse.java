@@ -25,6 +25,7 @@ public class OrderResponse {
   private OrderStatus status; // 주문상태
 
   private Integer totalPrice;
+  private Integer discountTotalPrice;
 
   public OrderResponse(Order order) {
     this.orderId = order.getId();
@@ -35,5 +36,6 @@ public class OrderResponse {
     this.orderDate = order.getOrderDate();
     this.status = order.getStatus();
     this.totalPrice = order.getTotalPrice();
+    this.discountTotalPrice = order.getDiscountTotalPrice();
   }
 }

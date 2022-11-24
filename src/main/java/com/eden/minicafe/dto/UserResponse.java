@@ -1,6 +1,6 @@
 package com.eden.minicafe.dto;
 
-import com.eden.minicafe.domain.Rank;
+import com.eden.minicafe.domain.Membership;
 import com.eden.minicafe.domain.User;
 import lombok.Getter;
 
@@ -16,7 +16,7 @@ public class UserResponse {
   private String name;
   private String phone;
   private Integer point;
-  private Rank rank;
+  private Membership membership;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
@@ -26,7 +26,7 @@ public class UserResponse {
     this.name = user.getName();
     this.phone = user.getPhone();
     this.point = user.getPoint();
-    this.rank = user.getRank();
+    this.membership = user.getMembership();
     this.createdAt = user.getCreatedAt();
     this.updatedAt = user.getUpdatedAt();
   }

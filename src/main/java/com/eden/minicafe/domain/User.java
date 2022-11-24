@@ -35,7 +35,7 @@ public class User {
   private Integer point;
 
   @Enumerated(EnumType.STRING)
-  private Rank rank;
+  private Membership membership;
 
   private String password;
 
@@ -56,6 +56,6 @@ public class User {
     this.phone = phone;
     this.password = password;
     this.point = 0;
-    this.rank = Rank.BRONZE;
+    this.membership = Membership.BRONZE;
   }
 }

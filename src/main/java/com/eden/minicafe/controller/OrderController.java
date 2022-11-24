@@ -43,7 +43,7 @@ public class OrderController {
   }
 
   /**
-   * 주문 확인
+   * 주문 확인 처리
    *
    * @param orderId 주문 id
    * @return 주문 id

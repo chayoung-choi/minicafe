@@ -7,7 +7,7 @@ create table users
     password   varchar(255) not null,
     phone      varchar(20),
     point      integer default 0,
-    rank       varchar(255),
+    membership varchar(255),
     created_at timestamp,
     updated_at timestamp,
     primary key (user_id)

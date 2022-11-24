@@ -38,6 +38,8 @@ public class Order extends BaseTime {
   @Enumerated(EnumType.STRING)
   private OrderStatus status; // 주문상태
 
+  private Integer discountTotalPrice; // 할인된 총 금액
+
   public static Order createOrder(User user, OrderItem... orderItems) {
     Order order = new Order();
     order.setUser(user);
@@ -46,6 +48,9 @@ public class Order extends BaseTime {
     }
     order.setStatus(OrderStatus.ORDER);
     order.setOrderDate(LocalDateTime.now());
+
+    int discountTotalPrice = user.getMembership().calculateDiscountTotalPrice(order.getTotalPrice());
+    order.setDiscountTotalPrice(discountTotalPrice);
     return order;
   }
 
@@ -92,7 +97,7 @@ public class Order extends BaseTime {
     if (status != OrderStatus.ORDER) {
       throw new IllegalComponentStateException("잘못된 요청입니다.");
     }
-    
+
     this.setStatus(OrderStatus.CONFIRM);
   }
 }
