@@ -34,7 +34,6 @@ public class ItemDto {
         Coffee coffee = new Coffee();
         coffee.setId(itemId);
         coffee.setName(name);
-        coffee.setCategory(category);
         coffee.setStock(stock);
         coffee.setOrigin(origin);
         return coffee;
@@ -43,7 +42,6 @@ public class ItemDto {
         Drink drink = new Drink();
         drink.setId(itemId);
         drink.setName(name);
-        drink.setCategory(category);
         drink.setStock(stock);
         return drink;
       }
@@ -51,7 +49,6 @@ public class ItemDto {
         Tea tea = new Tea();
         tea.setId(itemId);
         tea.setName(name);
-        tea.setCategory(category);
         tea.setStock(stock);
         tea.setOrigin(origin);
         return tea;
@@ -60,7 +57,6 @@ public class ItemDto {
         Food food = new Food();
         food.setId(itemId);
         food.setName(name);
-        food.setCategory(category);
         food.setStock(stock);
         food.setShelfLifeDate(shelfLifeDate);
         return food;

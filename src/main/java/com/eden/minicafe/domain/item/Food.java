@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
-@DiscriminatorValue("Food")
+@DiscriminatorValue("FOOD")
 @Getter
 @Setter
 public class Food extends Item {

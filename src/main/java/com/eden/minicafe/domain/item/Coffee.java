@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Coffee")
+@DiscriminatorValue("COFFEE")
 @Getter
 @Setter
 public class Coffee extends Item {
