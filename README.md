@@ -10,8 +10,6 @@
 | SpringBoot | 2.7.5   |
 | Gradle     | 7.5.1   |
 
-``
-
 ## API Dosc
 
 http://localhost:8080/docs/index.html
@@ -47,7 +45,8 @@ http://localhost:8080/docs/index.html
 - [X] 주문 정보 조회
 - [X] 주문 확인 상태 변경
 - [X] 주문 취소 상태 변경
-    - [ ] 주문 취소에 따른 상품 재고 복원
+    - [X] 주문 취소에 따른 상품 재고 복원
+- [X] 멤버십 등급에 따른 금액 할인
 
 ### 상품
 
@@ -57,4 +56,4 @@ http://localhost:8080/docs/index.html
 
 ### 공통
 
-- [ ] Enum @Valid
+- [X] Enum @Valid

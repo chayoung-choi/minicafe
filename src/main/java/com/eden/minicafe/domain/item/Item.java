@@ -28,9 +28,6 @@ public abstract class Item extends BaseTime {
 
   private Integer price;
 
-//  @Enumerated(EnumType.STRING)
-//  private Category category;
-
   @Column(columnDefinition = "integer default 0")
   private Integer stock;
 
@@ -40,8 +37,7 @@ public abstract class Item extends BaseTime {
   public void addStock(int quantity) {
     this.stock += quantity;
   }
-
-
+  
   /**
    * stock 감소
    */

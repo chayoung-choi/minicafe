@@ -16,7 +16,7 @@ ext {
 bootJar {
     dependsOn asciidoctor
     copy {
-        from ("${asciidoctor.outputDir}")
+        from("${asciidoctor.outputDir}")
         into 'BOOT-INF/classes/static/docs'
     }
 }
@@ -42,6 +42,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
 
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -55,7 +58,7 @@ dependencies {
     }
 
     // Spring Developer Tools
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-devtools'
 
     // Spring REST Docs
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
