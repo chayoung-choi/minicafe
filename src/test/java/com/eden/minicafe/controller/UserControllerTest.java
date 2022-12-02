@@ -10,12 +10,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -103,4 +106,17 @@ class UserControllerTest {
         .andDo(document("login"));
   }
 
+  @Test
+  void test() throws Exception {
+    String url = new DefaultUriBuilderFactory().builder()
+        .path("http://qamos20.daekyo.co.kr:6040/SMOSMGR/api/cuMbrTerms/history.do?zlogin_id=31178978&kunnr=0051856789")
+        .build().toString();
+
+    DefaultUriBuilderFactory uriBuilder = new DefaultUriBuilderFactory(url);
+
+    mvc.perform(get("http://qamos20.daekyo.co.kr:6040/SMOSMGR/api/cuMbrTerms/history.do?zlogin_id=31178978&kunnr=0051856789")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andDo(print());
+  }
 }

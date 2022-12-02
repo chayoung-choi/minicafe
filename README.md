@@ -10,6 +10,12 @@
 | SpringBoot | 2.7.5   |
 | Gradle     | 7.5.1   |
 
+### Database H2 Start
+
+```shell
+sh /h2/bin/h2.sh
+```
+
 ## API Dosc
 
 http://localhost:8080/docs/index.html
@@ -28,7 +34,7 @@ http://localhost:8080/docs/index.html
 
 `GET /items` : 상품 전체 조회
 
-## TO-DO
+## 구현 기능
 
 ### 회원
 

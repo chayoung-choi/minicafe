@@ -5,6 +5,8 @@ import com.eden.minicafe.dto.UserData;
 import com.eden.minicafe.dto.UserRegistrationData;
 import com.eden.minicafe.dto.UserResponse;
 import com.eden.minicafe.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,9 +30,10 @@ public class UserController {
    */
   @PostMapping("/users")
   @ResponseStatus(HttpStatus.CREATED)
-  UserResponse create(@RequestBody @Valid UserRegistrationData registrationData) {
-    User user = userService.registerUser(registrationData);
-    return new UserResponse(user);
+  Long create(@RequestBody @Valid UserRegistrationData registrationData) {
+    User user = User.builder().name(registrationData.getName()).email(registrationData.getEmail()).build();
+    userService.join(user);
+    return user.getId();
   }
 
   /**
@@ -41,8 +44,8 @@ public class UserController {
    */
   @GetMapping("/users/{id}")
   @ResponseStatus(HttpStatus.OK)
-  UserResponse getUser(@PathVariable Long id) {
-    User user = userService.getUserById(id);
+  UserResponse findById(@PathVariable Long id) {
+    User user = userService.findById(id);
     return new UserResponse(user);
   }
 
@@ -57,6 +60,19 @@ public class UserController {
   UserResponse login(@RequestBody @Valid UserData userData) {
     User user = userService.login(userData);
     return new UserResponse(user);
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class Result<T> {
+    private int count;
+    private T data;
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class UserDto {
+    private String name;
   }
 }
 

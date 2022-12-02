@@ -40,6 +40,9 @@ public class Order extends BaseTime {
 
   private Integer discountTotalPrice; // 할인된 총 금액
 
+  /**
+   * 주문 생성
+   */
   public static Order createOrder(User user, OrderItem... orderItems) {
     Order order = new Order();
     order.setUser(user);
@@ -80,14 +83,14 @@ public class Order extends BaseTime {
    */
   public void cancel() {
     switch (status) {
-      case CONFIRM -> throw new IllegalComponentStateException("이미 제조가 시작된 주문은 취소가 불가능합니다.");
-      case COMPLETION -> throw new IllegalComponentStateException("이미 제조가 완료된 주문은 취소가 불가능합니다.");
-      case PICKUP -> throw new IllegalComponentStateException("취소가 불가능합니다.");
-      case CANCEL -> throw new IllegalComponentStateException("이미 취소된 주문입니다.");
+      case CONFIRM -> throw new IllegalStateException("이미 제조가 시작된 주문은 취소가 불가능합니다.");
+      case COMPLETION -> throw new IllegalStateException("이미 제조가 완료된 주문은 취소가 불가능합니다.");
+      case PICKUP -> throw new IllegalStateException("취소가 불가능합니다.");
+      case CANCEL -> throw new IllegalStateException("이미 취소된 주문입니다.");
     }
 
     this.setStatus(OrderStatus.CANCEL);
-    orderItems.stream().forEach(orderItem -> orderItem.cancel());
+    orderItems.stream().forEach(OrderItem::cancel);
   }
 
   /**

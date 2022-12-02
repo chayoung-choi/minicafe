@@ -8,7 +8,6 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -27,15 +26,17 @@ public class OrderResponse {
   private Integer totalPrice;
   private Integer discountTotalPrice;
 
-  public OrderResponse(Order order) {
-    this.orderId = order.getId();
-    this.userName = order.getUser().getName();
-    this.orderItems = order.getOrderItems().stream()
-        .map(o -> new OrderItemDto(o))
-        .collect(Collectors.toList());
-    this.orderDate = order.getOrderDate();
-    this.status = order.getStatus();
-    this.totalPrice = order.getTotalPrice();
-    this.discountTotalPrice = order.getDiscountTotalPrice();
+  public static OrderResponse of(Order order) {
+    OrderResponse orderResponse = new OrderResponse();
+    orderResponse.orderId = order.getId();
+    orderResponse.userName = order.getUser().getName();
+    orderResponse.orderItems = order.getOrderItems().stream()
+        .map(OrderItemDto::new)
+        .toList();
+    orderResponse.orderDate = order.getOrderDate();
+    orderResponse.status = order.getStatus();
+    orderResponse.totalPrice = order.getTotalPrice();
+    orderResponse.discountTotalPrice = order.getDiscountTotalPrice();
+    return orderResponse;
   }
 }

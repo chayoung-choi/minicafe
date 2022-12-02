@@ -1,13 +1,18 @@
 package com.eden.minicafe.controller;
 
 import com.eden.minicafe.domain.Order;
-import com.eden.minicafe.dto.OrderRequest;
 import com.eden.minicafe.dto.OrderResponse;
 import com.eden.minicafe.service.OrderService;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,13 +25,15 @@ public class OrderController {
   /**
    * 주문
    *
-   * @param orderRequest 주문 정보
+   * @param request 주문 정보
    * @return 주문 정보 id
    */
   @PostMapping("/orders")
   @ResponseStatus(HttpStatus.CREATED)
-  Long order(@RequestBody OrderRequest orderRequest) {
-    return orderService.order(orderRequest);
+  Long order(@RequestBody OrderRequest request) {
+    List<OrderItem> orderItemList = request.getOrderItems().stream()
+        .map(i -> new OrderItem()).toList();
+    return orderService.order(request.getUserId(), orderItemList);
   }
 
   /**
@@ -39,7 +46,7 @@ public class OrderController {
   @ResponseStatus(HttpStatus.OK)
   OrderResponse order(@PathVariable Long orderId) {
     Order order = orderService.getOrder(orderId);
-    return new OrderResponse(order);
+    return OrderResponse.of(order);
   }
 
   /**
@@ -68,5 +75,29 @@ public class OrderController {
     return orderId;
   }
 
+  @Data
+  static class OrderRequest {
+    @NotNull
+    @JsonProperty("user_id")
+    private Long userId;
+
+    @NotNull
+    @JsonProperty("order_items")
+    private List<OrderItemDto> orderItems;
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class Result<T> {
+    private int count;
+    private T data;
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class OrderItemDto {
+    private Long itemId;
+    private int count;
+  }
 }
 

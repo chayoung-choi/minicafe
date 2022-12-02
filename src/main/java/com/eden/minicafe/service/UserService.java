@@ -2,8 +2,6 @@ package com.eden.minicafe.service;
 
 import com.eden.minicafe.domain.User;
 import com.eden.minicafe.dto.UserData;
-import com.eden.minicafe.dto.UserRegistrationData;
-import com.eden.minicafe.exception.DuplicationException;
 import com.eden.minicafe.exception.LoginFailException;
 import com.eden.minicafe.exception.NotFoundException;
 import com.eden.minicafe.repository.UserRepository;
@@ -22,25 +20,28 @@ public class UserService {
   private final UserRepository userRepository;
 
   /**
-   * 회원 등록
+   * 회원 가입
    *
-   * @param registrationData 등록 정보
-   * @return 생성된 회원 정보
+   * @param user
+   * @return
    */
   @Transactional
-  public User registerUser(UserRegistrationData registrationData) {
-    String email = registrationData.getEmail();
-    if (userRepository.existsByEmail(email)) {
-      throw new DuplicationException("email", email);
-    }
+  public Long join(User user) {
+    validateDuplicateUser(user);
+    userRepository.save(user);
+    return user.getId();
+  }
 
-    return userRepository.save(
-        User.builder()
-            .email(email)
-            .name(registrationData.getName())
-            .phone(registrationData.getPhone())
-            .password(registrationData.getPassword())
-            .build());
+  /**
+   * 중복 회원 검사
+   *
+   * @param user
+   */
+  private void validateDuplicateUser(User user) {
+    String email = user.getEmail();
+    if (userRepository.existsByEmail(email)) {
+      throw new IllegalStateException("이미 존재하는 이메일입니다. : ".concat(user.getEmail()));
+    }
   }
 
   /**
@@ -49,7 +50,7 @@ public class UserService {
    * @param id 회원 ID
    * @return 회원 정보
    */
-  public User getUserById(Long id) {
+  public User findById(Long id) {
     return userRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("회원(%d)", id)));
   }
 

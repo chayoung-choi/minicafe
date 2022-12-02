@@ -4,7 +4,6 @@ import com.eden.minicafe.domain.Order;
 import com.eden.minicafe.domain.OrderItem;
 import com.eden.minicafe.domain.User;
 import com.eden.minicafe.domain.item.Item;
-import com.eden.minicafe.dto.OrderRequest;
 import com.eden.minicafe.exception.NotFoundException;
 import com.eden.minicafe.repository.ItemRepository;
 import com.eden.minicafe.repository.OrderRepository;
@@ -14,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -28,20 +26,17 @@ public class OrderService {
 
   /**
    * 주문
-   *
-   * @param orderRequest 주문 요청 정보
-   * @return 주문 id
    */
   @Transactional
-  public Long order(OrderRequest orderRequest) {
-    User user = userRepository.findById(orderRequest.getUserId()).orElseThrow(() -> new NotFoundException("회원"));
+  public Long order(Long userId, List<OrderItem> orderItems) {
+    User user = userRepository.findById(userId).get();
 
-    List<OrderItem> orderItems = new ArrayList<>();
-    orderRequest.getOrderItems().forEach(requestItem -> {
-      Item item = itemRepository.findById(requestItem.getItemId()).orElseThrow(() -> new NotFoundException("상품"));
+//    List<OrderItem> orderItems = new ArrayList<>();
+    orderItems.forEach(oi -> {
+      Item item = itemRepository.findById(oi.getId()).orElseThrow(() -> new NotFoundException("상품"));
 
       // 주문 상품 생성
-      OrderItem orderItem = OrderItem.createOrderItem(item, requestItem.getCount());
+      OrderItem orderItem = OrderItem.createOrderItem(item, oi.getCount());
       orderItems.add(orderItem);
     });
 

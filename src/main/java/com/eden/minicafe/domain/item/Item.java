@@ -37,7 +37,7 @@ public abstract class Item extends BaseTime {
   public void addStock(int quantity) {
     this.stock += quantity;
   }
-  
+
   /**
    * stock 감소
    */
