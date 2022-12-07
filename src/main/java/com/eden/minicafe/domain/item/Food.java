@@ -1,10 +1,10 @@
 package com.eden.minicafe.domain.item;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Food extends Item {
-  /**
-   * 유통기한
-   */
-  private LocalDateTime shelfLifeDate;
+    /**
+     * 유통기한
+     */
+    private LocalDateTime shelfLifeDate;
 }

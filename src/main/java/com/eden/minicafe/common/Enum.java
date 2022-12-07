@@ -1,7 +1,8 @@
 package com.eden.minicafe.common;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -15,13 +16,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface Enum {
 
-  String message() default "Invalid value. This is not permitted.";
+    String message() default "Invalid value. This is not permitted.";
 
-  Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-  Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 
-  Class<? extends java.lang.Enum<?>> enumClass();
+    Class<? extends java.lang.Enum<?>> enumClass();
 
-  boolean ignoreCase() default false;
+    boolean ignoreCase() default false;
 }

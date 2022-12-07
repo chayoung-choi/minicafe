@@ -1,19 +1,19 @@
 package com.eden.minicafe.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 /**
  * 회원 로그인 요청 정보
  */
 @Data
 public class UserData {
-  @NotNull
-  @Email
-  private String email;
+    @NotNull
+    @Email
+    private String email;
 
-  @NotNull
-  private String password;
+    @NotNull
+    private String password;
 }
