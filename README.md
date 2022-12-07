@@ -1,9 +1,9 @@
 # Mini-Cafe
 
 <div style="display:flex">
-<img src="https://img.shields.io/badge/Java-17-brightgreen?logo=java">
-<img src="https://img.shields.io/badge/Springboot-v3.0.0-brightgreen?logo=springboot">
-<img src="https://img.shields.io/badge/Gradle-v7.5.1-brightgreen?logo=gradle">
+<img src="https://img.shields.io/badge/Java-17-success?logo=java">
+<img src="https://img.shields.io/badge/Springboot-v3.0.0-success?logo=springboot">
+<img src="https://img.shields.io/badge/Gradle-v7.6-success?logo=gradle">
 <img src="https://img.shields.io/badge/H2-v2.1.214-success">
 </div>
 
