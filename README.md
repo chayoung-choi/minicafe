@@ -1,19 +1,19 @@
 # Mini-Cafe
 
+<img src="https://img.shields.io/badge/Java-17-brightgreen?logo=java">
+
+<img src="https://img.shields.io/badge/Springboot-v3.0.0-brightgreen?logo=springboot">
+
+<img src="https://img.shields.io/badge/Gradle-v7.5.1-brightgreen?logo=gradle">
+
+<img src="https://img.shields.io/badge/H2-v2.1.214-brightgreen">
+
 > SpringBoot & JPA 기반의 Mini-Cafe 기능을 구현한 프로젝트
 
-## 프로젝트 환경
-
-| #          | version |
-|------------|---------|
-| Java       | 17      |
-| SpringBoot | 2.7.5   |
-| Gradle     | 7.5.1   |
-
-### Database H2 Start
+## Database H2 Start
 
 ```shell
-sh /h2/bin/h2.sh
+sh ~/h2/bin/h2.sh
 ```
 
 ## API Dosc
