@@ -9,7 +9,7 @@ import lombok.Data;
  * 회원 로그인 요청 정보
  */
 @Data
-public class UserData {
+public class UserLoginData {
     @NotNull
     @Email
     private String email;

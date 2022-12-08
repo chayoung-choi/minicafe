@@ -43,7 +43,7 @@ public class Order extends BaseTime {
     /**
      * 주문 생성
      */
-    public static Order createOrder(User user, OrderItem... orderItems) {
+    public static Order createOrder(User user, List<OrderItem> orderItems) {
         Order order = new Order();
         order.setUser(user);
         for (OrderItem orderItem : orderItems) {

@@ -1,9 +1,8 @@
 package com.eden.minicafe.controller;
 
-import com.eden.minicafe.domain.User;
-import com.eden.minicafe.dto.UserData;
-import com.eden.minicafe.dto.UserRegistrationData;
-import com.eden.minicafe.dto.UserResponse;
+import com.eden.minicafe.dto.UserDto;
+import com.eden.minicafe.dto.UserJoinData;
+import com.eden.minicafe.dto.UserLoginData;
 import com.eden.minicafe.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,15 +22,13 @@ public class UserController {
     /**
      * 회원 가입
      *
-     * @param registrationData 회원 정보
+     * @param request 회원 정보
      * @return 생성된 회원 정보
      */
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
-    Long create(@RequestBody UserRegistrationData registrationData) {
-        User user = User.builder().name(registrationData.getName()).email(registrationData.getEmail()).build();
-        userService.join(user);
-        return user.getId();
+    Long create(final @RequestBody UserJoinData request) {
+        return userService.join(request);
     }
 
     /**
@@ -42,22 +39,20 @@ public class UserController {
      */
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
-    UserResponse findById(@PathVariable Long id) {
-        User user = userService.findById(id);
-        return new UserResponse(user);
+    UserDto findById(@PathVariable Long id) {
+        return userService.findById(id);
     }
 
     /**
      * 회원 로그인
      *
-     * @param userData 회원 로그인 요청 정보
+     * @param userLoginData 회원 로그인 요청 정보
      * @return 회원 정보
      */
     @PostMapping(value = "/login")
     @ResponseStatus(HttpStatus.OK)
-    UserResponse login(@RequestBody UserData userData) {
-        User user = userService.login(userData);
-        return new UserResponse(user);
+    UserDto login(@RequestBody UserLoginData userLoginData) {
+        return userService.login(userLoginData);
     }
 
     @Data
@@ -65,12 +60,6 @@ public class UserController {
     static class Result<T> {
         private int count;
         private T data;
-    }
-
-    @Data
-    @AllArgsConstructor
-    static class UserDto {
-        private String name;
     }
 }
 

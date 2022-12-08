@@ -10,7 +10,7 @@ import lombok.Data;
  * 회원 생성 요청 정보
  */
 @Data
-public class UserRegistrationData {
+public class UserJoinData {
     @Email
     private String email;
 

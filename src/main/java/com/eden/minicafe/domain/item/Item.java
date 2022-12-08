@@ -1,6 +1,7 @@
 package com.eden.minicafe.domain.item;
 
 import com.eden.minicafe.domain.BaseTime;
+import com.eden.minicafe.domain.Category;
 import com.eden.minicafe.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +15,7 @@ import lombok.*;
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "category", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "category")
 @Table(name = "items")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +31,11 @@ public abstract class Item extends BaseTime {
 
     @Column(columnDefinition = "integer default 0")
     private Integer stock;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category", insertable = false, updatable = false)
+    private Category category;
 
     /**
      * stock 증가

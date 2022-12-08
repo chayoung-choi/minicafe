@@ -1,6 +1,5 @@
 package com.eden.minicafe.controller;
 
-import com.eden.minicafe.domain.item.Item;
 import com.eden.minicafe.dto.ItemDto;
 import com.eden.minicafe.service.ItemService;
 import jakarta.validation.Valid;
@@ -38,7 +37,7 @@ public class ItemController {
      */
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    List<Item> getItems() {
+    List<ItemDto> getItems() {
         return itemService.getItems();
     }
 }
