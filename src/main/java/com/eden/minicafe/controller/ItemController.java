@@ -2,7 +2,6 @@ package com.eden.minicafe.controller;
 
 import com.eden.minicafe.dto.ItemDto;
 import com.eden.minicafe.service.ItemService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,8 +25,14 @@ public class ItemController {
      */
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    Long createItem(@RequestBody @Valid ItemDto itemDto) {
+    Long createItem(@RequestBody ItemDto itemDto) {
         return itemService.saveItem(itemDto);
+    }
+
+    @GetMapping("/{itemId}")
+    @ResponseStatus(HttpStatus.OK)
+    ItemDto getItem(@PathVariable Long itemId) {
+        return itemService.findById(itemId);
     }
 
     /**
@@ -37,8 +42,8 @@ public class ItemController {
      */
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    List<ItemDto> getItems() {
-        return itemService.getItems();
+    List<ItemDto> getItems(ItemDto itemDto) {
+        return itemService.findAll(itemDto);
     }
 }
 

@@ -2,7 +2,6 @@ package com.eden.minicafe.service;
 
 import com.eden.minicafe.domain.item.Item;
 import com.eden.minicafe.dto.ItemDto;
-import com.eden.minicafe.dto.ItemMapper2;
 import com.eden.minicafe.exception.DuplicationException;
 import com.eden.minicafe.mapper.ItemMapper;
 import com.eden.minicafe.repository.ItemRepository;
@@ -29,11 +28,25 @@ public class ItemService {
      */
     @Transactional
     public Long saveItem(ItemDto itemDto) {
-        Item item = ItemMapper.INSTANCE.toEntityOfCoffee(itemDto);
+        Item item = ItemMapper.INSTANCE.toEntity(itemDto);
+
         if (itemRepository.existsByName(itemDto.getName())) {
             throw new DuplicationException("상품 이름", itemDto.getName());
         }
-        return itemRepository.save(ItemMapper2.of(itemDto)).getId();
+        return itemRepository.save(item).getId();
+    }
+
+    /**
+     * 상품 조회
+     *
+     * @param itemId 상품 id
+     * @return 상품
+     */
+    public ItemDto findById(Long itemId) {
+        Item item = itemRepository.findById(itemId).get();
+
+        ItemDto itemDto = null;
+        return itemDto;
     }
 
     /**
@@ -41,8 +54,9 @@ public class ItemService {
      *
      * @return list 상품
      */
-    public List<ItemDto> getItems() {
+    public List<ItemDto> findAll(ItemDto itemDto) {
         List<Item> items = itemRepository.findAll();
-        return items.stream().map(ItemMapper2::of).toList();
+
+        return items.stream().map(item -> ItemMapper.INSTANCE.toDto(item)).toList();
     }
 }

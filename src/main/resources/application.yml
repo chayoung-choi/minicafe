@@ -27,4 +27,4 @@ spring:
     init:
       mode: always  # init data.sql
 logging.level:
-  org.hibernate.type: trace
+  org.hibernate.type: DEBUG
