@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: mini-cafe
+  datasource:
+    url: jdbc:h2:mem:minicafe # in memory
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true # init data.sql
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true # JPA Log
+  devtools:
+    restart:
+      enabled: true
+  sql:
+    init:
+      mode: always  # init data.sql
