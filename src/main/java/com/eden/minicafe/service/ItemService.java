@@ -44,9 +44,7 @@ public class ItemService {
      */
     public ItemDto findById(Long itemId) {
         Item item = itemRepository.findById(itemId).get();
-
-        ItemDto itemDto = null;
-        return itemDto;
+        return ItemMapper.INSTANCE.toDto(item);
     }
 
     /**
@@ -54,9 +52,10 @@ public class ItemService {
      *
      * @return list 상품
      */
-    public List<ItemDto> findAll(ItemDto itemDto) {
+    public List<ItemDto> findAll(ItemDto searchItem) {
         List<Item> items = itemRepository.findAll();
 
-        return items.stream().map(item -> ItemMapper.INSTANCE.toDto(item)).toList();
+        return items.stream().map(item ->
+                ItemMapper.INSTANCE.toDto(item)).toList();
     }
 }

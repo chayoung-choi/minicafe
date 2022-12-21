@@ -2,9 +2,7 @@ package com.eden.minicafe.mapper;
 
 import com.eden.minicafe.domain.item.*;
 import com.eden.minicafe.dto.ItemDto;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", // Spring Bean 으로 생성
@@ -14,16 +12,17 @@ import org.mapstruct.factory.Mappers;
 public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
+
+    @Mapping(source = "id", target = "itemId")
+    @SubclassMapping(source = Coffee.class, target = ItemDto.class)
+    @SubclassMapping(source = Drink.class, target = ItemDto.class)
+    @SubclassMapping(source = Food.class, target = ItemDto.class)
+    @SubclassMapping(source = Tea.class, target = ItemDto.class)
     ItemDto toDto(Item item);
 
-    ItemDto toDto(Coffee coffee);
-
-    ItemDto toDto(Drink drink);
-
-    ItemDto toDto(Food food);
-
-    ItemDto toDto(Tea tea);
-
+    //    @SubclassMapping(source = ItemDto.class, target = Tea.class)
+//    Item toEntity(ItemDto itemDto, @MappingTarget Coffee);
+//
     default Item toEntity(ItemDto itemDto) {
         switch (itemDto.getCategory()) {
             case COFFEE -> {
